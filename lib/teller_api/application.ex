@@ -8,6 +8,7 @@ defmodule TellerApi.Application do
   @impl true
   def start(_type, _args) do
     children = [
+      Plug.Adapters.Cowboy.child_spec(scheme: :http, plug: TellerApi.Router, options: [port: 8085])
       # Starts a worker by calling: TellerApi.Worker.start_link(arg)
       # {TellerApi.Worker, arg}
     ]
