@@ -2,6 +2,7 @@ defmodule TellerApi.Router do
     use Plug.Router
     use Plug.Debugger
     require Logger
+  plug(BasicAuth, realm: "API", username: "test_admin", password: "")
   plug(Plug.Logger, log: :debug)
 
 
@@ -20,12 +21,7 @@ defmodule TellerApi.Router do
   end
   
   get "/accounts/:account_id" do
-    IO.inspect(account_id)
-    if account_id === "1" do
-      send_resp(conn, 200, "Accounts #{account_id} Its a 1")
-    else
-      send_resp(conn, 200, "Accounts #{account_id}")
-    end
+    send_resp(conn, 200, "Accounts #{account_id}")
   end
   
   get "/accounts/:account_id/details" do
