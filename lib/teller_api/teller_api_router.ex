@@ -27,7 +27,7 @@ defmodule TellerApi.Router do
   get "/accounts/:account_id" do
     {account_no, ""} = Integer.parse(account_id)
     accounts = getAccounts()
-    if account_no < length(accounts) do
+    if account_no <= length(accounts) do
       {status, result} = JSON.encode(Enum.at(accounts, account_no - 1))
       send_resp(conn, 200, result)
     else
@@ -36,7 +36,15 @@ defmodule TellerApi.Router do
   end
   
   get "/accounts/:account_id/details" do
-    send_resp(conn, 200, "Accounts #{account_id} details")
+    {account_no, ""} = Integer.parse(account_id)
+    accounts = getAccounts()
+    if account_no <= length(accounts) do
+      accountsDetails = getAccountsDetails()
+      {status, result} = JSON.encode(Enum.at(accountsDetails, account_no - 1))
+      send_resp(conn, 200, result)
+    else
+      send_resp(conn, 404, "Account not found")
+    end
   end
   
   get "/accounts/:account_id/balances" do

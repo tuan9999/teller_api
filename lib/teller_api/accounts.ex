@@ -63,6 +63,44 @@ defmodule TellerApi.Accounts do
         ]
         accounts
       end
+      def getAccountsDetails do
+        accountsDetails = [
+          [
+            account_id: "1",
+            account_number: "487069578707",
+            links: [
+              account: "https://api.teller.io/accounts/1",
+              self: "https://api.teller.io/accounts/1/details"
+            ],
+            routing_numbers: [
+              ach: "438939044"
+            ]
+          ],
+          [
+            account_id: "2",
+            account_number: "487069578708",
+            links: [
+              account: "https://api.teller.io/accounts/2",
+              self: "https://api.teller.io/accounts/2/details"
+            ],
+            routing_numbers: [
+              ach: "438939045"
+            ]
+          ],
+          [
+            account_id: "3",
+            account_number: "487069578709",
+            links: [
+              account: "https://api.teller.io/accounts/3",
+              self: "https://api.teller.io/accounts/3/details"
+            ],
+            routing_numbers: [
+              ach: "438939046"
+            ]
+          ],
+        ]
+        accountsDetails
+      end
     end
   end
 end
