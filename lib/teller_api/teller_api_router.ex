@@ -6,17 +6,11 @@ defmodule TellerApi.Router do
   plug(Plug.Logger, log: :debug)
 
   use TellerApi.Accounts
+  use TellerApi.GenerateFunctions
 
   plug(:match)
 
   plug(:dispatch)
-
-  # Simple GET Request handler for path /hello
-  get "/hello" do
-    send_resp(conn, 200, "world")
-    accounts = getAccounts()
-    IO.inspect(accounts)
-  end
   
   get "/accounts" do
     accounts = getAccounts()
@@ -60,11 +54,25 @@ defmodule TellerApi.Router do
   end
   
   get "/accounts/:account_id/transactions" do
-    send_resp(conn, 200, "Accounts #{account_id} transactions")
+    {account_no, ""} = Integer.parse(account_id)
+    accounts = getAccounts()
+    if account_no <= length(accounts) do
+      send_resp(conn, 200, "transactions")
+    else
+      send_resp(conn, 404, "Account not found")
+    end
   end
   
   get "/accounts/:account_id/transactions/:transaction_id" do
-    send_resp(conn, 200, "Accounts #{account_id} transactions #{transaction_id}")
+    {account_no, ""} = Integer.parse(account_id)
+    accounts = getAccounts()
+    if account_no <= length(accounts) do
+      transaction = generateTransaction(account_no, transaction_id)
+      {_status, result} = JSON.encode(transaction)
+      send_resp(conn, 200, result)
+    else
+      send_resp(conn, 404, "Account not found")
+    end
   end
 
   # "Default" route that will get called when no other route is matched

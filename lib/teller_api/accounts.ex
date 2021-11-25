@@ -1,4 +1,5 @@
 defmodule TellerApi.Accounts do
+  use TellerApi.GenerateFunctions
   defmacro __using__(_opts) do
     quote do
       def getAccounts do
@@ -61,7 +62,6 @@ defmodule TellerApi.Accounts do
             :type => "depository"
           },
         ]
-        accounts
       end
       def getAccountsDetails do
         accountsDetails = [
@@ -99,7 +99,6 @@ defmodule TellerApi.Accounts do
             }
           },
         ]
-        accountsDetails
       end
       def getAccountsBalances do
         accountBalances = [

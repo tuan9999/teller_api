@@ -26,7 +26,7 @@ defmodule TellerApi.MixProject do
       {:plug, "~> 1.5"},
       {:poison, "~> 3.1"},
       {:basic_auth, "~> 1.0.0"},
-      {:json, "~> 1.4"}
+      {:json, "~> 1.4"},
     ]
   end
 end
