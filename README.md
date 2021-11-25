@@ -1,21 +1,16 @@
 # TellerApi
 
-**TODO: Add description**
+A Simple Sandbox api, written in Elixir, based off of the [teller api](https://teller.io/docs/api/2020-10-12#).
 
-## Installation
+## Usage
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `teller_api` to your list of dependencies in `mix.exs`:
+To run the project execute `iex -S mix` in the root of the repository.
 
-```elixir
-def deps do
-  [
-    {:teller_api, "~> 0.1.0"}
-  ]
-end
-```
+The following routes are available:
+- /accounts
+- /accounts/:account_id
+- /accounts/:account_id/details
+- /accounts/:account_id/balances
+- /accounts/:account_id/transactions/:transaction_id
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/teller_api](https://hexdocs.pm/teller_api).
-
+These return the corresponding JSON encoded data.
